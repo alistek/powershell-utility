@@ -18,9 +18,9 @@ Function New-SSHSession {
 
     Param(
         [Parameter(Mandatory=$true, Position=0)][String]$Name,
-        [Parameter(Position=1)][String]$Key = "C:\Users\Adam Listek\.ssh\id_rsa_sunphoenix_digitalocean",
-        [Parameter(Position=2)][String]$Port = "55567",
-        [Parameter(Position=3)][String]$Username = "root",
+        [Parameter(Position=1)][String]$Key,
+        [Parameter(Position=2)][String]$Port,
+        [Parameter(Position=3)][String]$Username,
         [Parameter(Mandatory=$true, Position=4)][String]$ApiKey
     ) # Terminate Param
 
@@ -72,7 +72,7 @@ Function New-SSHSession {
             If (-Not $whatif) {
                 Try {
                     & stermc "$Username@$ip" "-port=$Port" "-keypairFile=$key"
-                } Catch { 
+                } Catch {
                     Write-Host "Error!" -BackgroundColor Red
                 } # Terminate Try-Catch
             } Else {
